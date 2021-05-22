@@ -3,3 +3,5 @@
 //
 
 #import "FlickrApi.h"
+#import <UIKit/UIKit.h>
+#import <FlickrKit/FlickrKit.h>

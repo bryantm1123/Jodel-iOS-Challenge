@@ -15,12 +15,16 @@ class FeedViewController : UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        FlickrApi.fetchPhotos { [weak self] (responsePhotos, error) in
-            self?.photos = responsePhotos ?? []
-            DispatchQueue.main.async(execute: {
-                self?.collectionView?.reloadData()
-            })
-        }
+        let service = FlickrService()
+        
+        service.fetchPhotos(for: "15")
+        
+//        FlickrApi.fetchPhotos { [weak self] (responsePhotos, error) in
+//            self?.photos = responsePhotos ?? []
+//            DispatchQueue.main.async(execute: {
+//                self?.collectionView?.reloadData()
+//            })
+//        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
