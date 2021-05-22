@@ -17,7 +17,9 @@ class FeedViewController : UICollectionViewController {
         
         let service = FlickrService()
         
-        service.fetchPhotos(for: "15")
+        service.fetchPhotos(for: "15", completion: { result in
+            
+        })
         
 //        FlickrApi.fetchPhotos { [weak self] (responsePhotos, error) in
 //            self?.photos = responsePhotos ?? []
