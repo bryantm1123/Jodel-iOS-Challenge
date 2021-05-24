@@ -98,7 +98,6 @@
 			isa = PBXGroup;
 			children = (
 				926F594426589C8E00A0E029 /* FlickrService.swift */,
-				926F59482658B54800A0E029 /* PhotoResponse.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -162,6 +161,7 @@
 		926F59472658B52800A0E029 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				926F59482658B54800A0E029 /* PhotoResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
