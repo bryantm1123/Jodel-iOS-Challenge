@@ -21,6 +21,8 @@
 		926F594E2658C27600A0E029 /* PhotosSampleResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 926F594D2658C27600A0E029 /* PhotosSampleResponse.json */; };
 		926F5951265B4E2100A0E029 /* PhotosPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926F5950265B4E2100A0E029 /* PhotosPresenter.swift */; };
 		926F5953265B4E4C00A0E029 /* PhotosPresentationLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926F5952265B4E4C00A0E029 /* PhotosPresentationLogic.swift */; };
+		926F5955265B5E5200A0E029 /* PhotosPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926F5954265B5E5200A0E029 /* PhotosPresenterTests.swift */; };
+		926F5958265B60B300A0E029 /* MockDataStubber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926F5957265B60B300A0E029 /* MockDataStubber.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +56,8 @@
 		926F594D2658C27600A0E029 /* PhotosSampleResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PhotosSampleResponse.json; sourceTree = "<group>"; };
 		926F5950265B4E2100A0E029 /* PhotosPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosPresenter.swift; sourceTree = "<group>"; };
 		926F5952265B4E4C00A0E029 /* PhotosPresentationLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosPresentationLogic.swift; sourceTree = "<group>"; };
+		926F5954265B5E5200A0E029 /* PhotosPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosPresenterTests.swift; sourceTree = "<group>"; };
+		926F5957265B60B300A0E029 /* MockDataStubber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataStubber.swift; sourceTree = "<group>"; };
 		A7096B2AF22017DBA2B785C4 /* Pods-JodelChallenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JodelChallenge.release.xcconfig"; path = "Pods/Target Support Files/Pods-JodelChallenge/Pods-JodelChallenge.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -142,6 +146,8 @@
 		3FBCC7581F73AE9200D35147 /* JodelChallengeTests */ = {
 			isa = PBXGroup;
 			children = (
+				926F5956265B607C00A0E029 /* Utilities */,
+				926F5954265B5E5200A0E029 /* PhotosPresenterTests.swift */,
 				926F594C2658C25200A0E029 /* Resources */,
 				926F594A2658C07300A0E029 /* FlickrServiceTests.swift */,
 				3FBCC7591F73AE9200D35147 /* JodelChallengeTests.swift */,
@@ -181,6 +187,14 @@
 				926F5952265B4E4C00A0E029 /* PhotosPresentationLogic.swift */,
 			);
 			path = Presenter;
+			sourceTree = "<group>";
+		};
+		926F5956265B607C00A0E029 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				926F5957265B60B300A0E029 /* MockDataStubber.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -345,7 +359,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				926F594B2658C07300A0E029 /* FlickrServiceTests.swift in Sources */,
+				926F5955265B5E5200A0E029 /* PhotosPresenterTests.swift in Sources */,
 				3FBCC75A1F73AE9200D35147 /* JodelChallengeTests.swift in Sources */,
+				926F5958265B60B300A0E029 /* MockDataStubber.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

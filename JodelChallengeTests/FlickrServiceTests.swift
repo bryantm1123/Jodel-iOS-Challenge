@@ -13,6 +13,8 @@ class FlickrServiceTests: XCTestCase {
     
     var sut: FlickrService?
     var mockEngine: MockPhotoEngine?
+    let bundle = Bundle(for: FlickrServiceTests.self)
+    let resource = "PhotosSampleResponse"
 
     override func setUpWithError() throws {
         mockEngine = MockPhotoEngine()
@@ -29,7 +31,7 @@ class FlickrServiceTests: XCTestCase {
     /// - Throws: An error if one is caught
     func testDecodingWithValidResponse() throws {
         // Given
-        mockEngine?.response = getPhotoResponse()
+        mockEngine?.response = getDataResponse(from: bundle, for: resource, of: "json")
         let expectedFirstPhotoId = "51190594964"
         let expectedFirstPhotoTitle = "*Seceda at the golden hour*"
         
@@ -128,33 +130,4 @@ class MockPhotoEngine: PhotoEngine {
         ]
     }
     
-}
-
-// MARK: Stub functions
-extension FlickrServiceTests {
-    
-    /// A stub function that returns our our sample photo response as data for passing to our service's decoder
-    /// - Returns: An error if one is caught during conversion of the mock response to data
-    func getPhotoResponse() -> [String:Any]? {
-        let bundle = Bundle(for: FlickrServiceTests.self)
-        if let path = bundle.path(forResource: "PhotosSampleResponse", ofType: "json") {
-            do {
-                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                let object = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-                if let dictionary = object as? [String: AnyObject] {
-                    return dictionary
-                }
-            } catch let error {
-                print(error)
-            }
-        }
-        return nil
-    }
-    
-    
-    /// A stub function that returns a custom error object used for testing
-    /// - Returns: A custom error that can be passed to our mock
-    func getError() -> Error {
-        return NSError(domain: "myError", code: 0, userInfo: nil)
-    }
 }
