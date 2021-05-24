@@ -107,5 +107,3 @@ enum PhotoServiceError: Error {
     case decodingError
     case networkError
 }
-
-typealias Handler = ([URL], Error) -> Void

@@ -20,6 +20,8 @@
 		926F59492658B54800A0E029 /* PhotoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926F59482658B54800A0E029 /* PhotoResponse.swift */; };
 		926F594B2658C07300A0E029 /* FlickrServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926F594A2658C07300A0E029 /* FlickrServiceTests.swift */; };
 		926F594E2658C27600A0E029 /* PhotosSampleResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 926F594D2658C27600A0E029 /* PhotosSampleResponse.json */; };
+		926F5951265B4E2100A0E029 /* PhotosPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926F5950265B4E2100A0E029 /* PhotosPresenter.swift */; };
+		926F5953265B4E4C00A0E029 /* PhotosPresentationLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926F5952265B4E4C00A0E029 /* PhotosPresentationLogic.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,8 @@
 		926F59482658B54800A0E029 /* PhotoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoResponse.swift; sourceTree = "<group>"; };
 		926F594A2658C07300A0E029 /* FlickrServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrServiceTests.swift; sourceTree = "<group>"; };
 		926F594D2658C27600A0E029 /* PhotosSampleResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PhotosSampleResponse.json; sourceTree = "<group>"; };
+		926F5950265B4E2100A0E029 /* PhotosPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosPresenter.swift; sourceTree = "<group>"; };
+		926F5952265B4E4C00A0E029 /* PhotosPresentationLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosPresentationLogic.swift; sourceTree = "<group>"; };
 		A7096B2AF22017DBA2B785C4 /* Pods-JodelChallenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JodelChallenge.release.xcconfig"; path = "Pods/Target Support Files/Pods-JodelChallenge/Pods-JodelChallenge.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -75,13 +79,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0A3FEA1122C4DF2C0007A257 /* Screens */ = {
+		0A3FEA1122C4DF2C0007A257 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				0A0367FA22C4E2BE0041C31E /* FeedViewController.swift */,
 				0A0367FC22C4E5DC0041C31E /* FeedCell.swift */,
 			);
-			path = Screens;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		1E27EA24C815FAE48893FF55 /* Pods */ = {
@@ -93,7 +97,7 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		3F89F9C91F73AF8A002A3FCB /* NetworkAPI */ = {
+		3F89F9C91F73AF8A002A3FCB /* Services */ = {
 			isa = PBXGroup;
 			children = (
 				926F594426589C8E00A0E029 /* FlickrService.swift */,
@@ -101,7 +105,7 @@
 				3F89F9CE1F73AFFC002A3FCB /* FlickrApi.m */,
 				926F59482658B54800A0E029 /* PhotoResponse.swift */,
 			);
-			path = NetworkAPI;
+			path = Services;
 			sourceTree = "<group>";
 		};
 		3FBCC7381F73AE9200D35147 = {
@@ -127,9 +131,10 @@
 		3FBCC7431F73AE9200D35147 /* JodelChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				926F594F265B488100A0E029 /* Presenter */,
 				926F59472658B52800A0E029 /* Models */,
-				0A3FEA1122C4DF2C0007A257 /* Screens */,
-				3F89F9C91F73AF8A002A3FCB /* NetworkAPI */,
+				0A3FEA1122C4DF2C0007A257 /* Views */,
+				3F89F9C91F73AF8A002A3FCB /* Services */,
 				3FBCC7441F73AE9200D35147 /* AppDelegate.swift */,
 				3FBCC7481F73AE9200D35147 /* Main.storyboard */,
 				3FBCC74B1F73AE9200D35147 /* Assets.xcassets */,
@@ -172,6 +177,15 @@
 				926F594D2658C27600A0E029 /* PhotosSampleResponse.json */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		926F594F265B488100A0E029 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				926F5950265B4E2100A0E029 /* PhotosPresenter.swift */,
+				926F5952265B4E4C00A0E029 /* PhotosPresentationLogic.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -326,7 +340,9 @@
 				3FBCC7451F73AE9200D35147 /* AppDelegate.swift in Sources */,
 				926F59492658B54800A0E029 /* PhotoResponse.swift in Sources */,
 				3F5224401F73B0C100D7D77A /* FlickrApi.m in Sources */,
+				926F5951265B4E2100A0E029 /* PhotosPresenter.swift in Sources */,
 				0A0367FD22C4E5DC0041C31E /* FeedCell.swift in Sources */,
+				926F5953265B4E4C00A0E029 /* PhotosPresentationLogic.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
