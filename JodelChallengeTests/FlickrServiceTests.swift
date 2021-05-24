@@ -24,6 +24,9 @@ class FlickrServiceTests: XCTestCase {
         sut = nil
     }
 
+    
+    /// Test that our decoder properly decodes our response object given a mock response object
+    /// - Throws: An error if one is caught
     func testDecodingWithValidResponse() throws {
         // Given
         mockEngine?.response = getPhotoResponse()
@@ -45,6 +48,9 @@ class FlickrServiceTests: XCTestCase {
         })
     }
     
+    
+    /// Test that we receive our expected error enum case when decoding our response object fails
+    /// - Throws: An error if one is caught
     func testErrorResponseOnInvalidDecoding() throws {
         // Given
         mockEngine?.response = [:]
@@ -63,6 +69,9 @@ class FlickrServiceTests: XCTestCase {
         })
     }
     
+    
+    /// Test that we receive our expected error enum case when our network response fails
+    /// - Throws: An error if one is caught
     func testExpectedErrorOnErrorResponse() throws {
         // Given
         mockEngine?.response = [:]
@@ -81,9 +90,10 @@ class FlickrServiceTests: XCTestCase {
             }
         })
     }
-
 }
 
+
+/// A mock PhotoEngine object that we can pass to our service to test given response and error cases
 class MockPhotoEngine: PhotoEngine {
     
     var response: [String:Any]?
@@ -94,7 +104,11 @@ class MockPhotoEngine: PhotoEngine {
     }
 }
 
+// MARK: Stub functions
 extension FlickrServiceTests {
+    
+    /// A stub function that returns our our sample photo response as data for passing to our service's decoder
+    /// - Returns: An error if one is caught during conversion of the mock response to data
     func getPhotoResponse() -> [String:Any]? {
         let bundle = Bundle(for: FlickrServiceTests.self)
         if let path = bundle.path(forResource: "PhotosSampleResponse", ofType: "json") {
@@ -111,6 +125,9 @@ extension FlickrServiceTests {
         return nil
     }
     
+    
+    /// A stub function that returns a custom error object used for testing
+    /// - Returns: A custom error that can be passed to our mock
     func getError() -> Error {
         return NSError(domain: "myError", code: 0, userInfo: nil)
     }
