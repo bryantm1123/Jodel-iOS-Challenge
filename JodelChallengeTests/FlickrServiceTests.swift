@@ -90,6 +90,20 @@ class FlickrServiceTests: XCTestCase {
             }
         })
     }
+    
+    
+    /// Tests that the service will return a valid URL if passed data from the photo
+    /// - Throws: An error if one is caught
+    func testURLReturnedFromPhotoResponse() throws {
+        // Given
+        let photos: [Photo] = [Photo(id: "1", owner: "me", secret: "secret", server: "server", farm: 0, title: "mockPhoto", isPublic: 0, isFriend: 0, isFamily: 0)]
+        
+        // When
+        let urls: [URL] = (sut?.fetchPhotoUrls(from: photos))!
+        
+        // Then
+        XCTAssertTrue(urls.first!.absoluteString.contains(photos.first!.server))
+    }
 }
 
 
@@ -98,10 +112,22 @@ class MockPhotoEngine: PhotoEngine {
     
     var response: [String:Any]?
     var error: Error?
+    var photoURLs: [URL] = []
     
     func fetchPhotos(method: FKFlickrAPIMethod, completion: @escaping FKAPIRequestCompletion) {
         completion(response, error)
     }
+    
+    func fetchPhotoUrls(from photos: [Photo]) -> [URL] {
+        let id = photos.first?.id
+        let server = photos.first?.server
+        let secret = photos.first?.secret
+        
+        return [
+            URL(string: "https://farm\(id ?? "").static.flickr.com/\(server ?? "")/\(secret ?? "")).jpg")!
+        ]
+    }
+    
 }
 
 // MARK: Stub functions
