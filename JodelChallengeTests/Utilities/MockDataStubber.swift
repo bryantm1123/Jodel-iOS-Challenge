@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 
 protocol MockDataStubber {
-    func getDataResponse(from bundle: Bundle, for resource: String, of fileType: String) -> [String:Any]?
+    func getDataDictionaryResponse(from bundle: Bundle, for resource: String, of fileType: String) -> [String:Any]?
     
     func getError() -> Error
 }
@@ -18,7 +18,10 @@ protocol MockDataStubber {
 
 // MARK: Stub functions
 extension XCTest: MockDataStubber {
-    func getDataResponse(from bundle: Bundle, for resource: String, of fileType: String) -> [String : Any]? {
+    
+    /// A stub function that returns our  response as a dictionary for passing to our service's decoder
+    /// - Returns: An error if one is caught during conversion of the mock response to data
+    func getDataDictionaryResponse(from bundle: Bundle, for resource: String, of fileType: String) -> [String : Any]? {
         if let path = bundle.path(forResource: resource, ofType: fileType) {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)

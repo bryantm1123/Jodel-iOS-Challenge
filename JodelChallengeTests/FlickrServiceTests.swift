@@ -31,7 +31,7 @@ class FlickrServiceTests: XCTestCase {
     /// - Throws: An error if one is caught
     func testDecodingWithValidResponse() throws {
         // Given
-        mockEngine?.response = getDataResponse(from: bundle, for: resource, of: "json")
+        mockEngine?.response = getDataDictionaryResponse(from: bundle, for: resource, of: "json")
         let expectedFirstPhotoId = "51190594964"
         let expectedFirstPhotoTitle = "*Seceda at the golden hour*"
         
