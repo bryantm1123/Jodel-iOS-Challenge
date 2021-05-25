@@ -70,7 +70,7 @@ class FlickrService {
     /// Fetches photo urls using the FlickrKit framework
     /// - Parameter photos: An array of photo objects retrieved from the Flickr API
     /// - Returns: An array of URLs for loading images
-    func fetchPhotoUrls(from photos: [Photo]) -> [URL] {
+    func fetchPhotoUrls(from photos: [Photo]) -> [PhotoTuple] {
         return engine.fetchPhotoUrls(from: photos)
     }
     
@@ -80,7 +80,7 @@ class FlickrService {
 protocol PhotoEngine {
     func fetchPhotos(method: FKFlickrAPIMethod, completion: @escaping FKAPIRequestCompletion)
     
-    func fetchPhotoUrls(from photos: [Photo]) -> [URL]
+    func fetchPhotoUrls(from photos: [Photo]) -> [PhotoTuple]
 }
 
 extension FlickrKit: PhotoEngine {
@@ -88,12 +88,12 @@ extension FlickrKit: PhotoEngine {
         call(method, completion: completion)
     }
     
-    func fetchPhotoUrls(from photos: [Photo]) -> [URL] {
-        var photoUrls: [URL] = []
+    func fetchPhotoUrls(from photos: [Photo]) -> [PhotoTuple] {
+        var photoUrls: [PhotoTuple] = []
         
         photos.forEach({
             let photoURL = FlickrKit.shared().photoURL(for: .medium640, photoID: $0.id, server: $0.server, secret: $0.secret, farm: "\($0.farm)")
-            photoUrls.append(photoURL)
+            photoUrls.append(($0.title, photoURL))
         })
         
         return photoUrls
@@ -107,3 +107,5 @@ enum PhotoServiceError: Error {
     case decodingError
     case networkError
 }
+
+typealias PhotoTuple = (String, URL)

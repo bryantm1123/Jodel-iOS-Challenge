@@ -12,10 +12,14 @@ class FeedCell : UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
     
-    public func configure(with imageUrl : URL) {
-        if let data = try? Data(contentsOf: imageUrl) {
+    @IBOutlet weak var titleLabel: UILabel!
+    
+    public func configure(with photo: PhotoTuple) {
+        if let data = try? Data(contentsOf: photo.1) {
             let image = UIImage(data: data)
             imageView.image = image
         }
+        
+        titleLabel.text = photo.0
     }
 }

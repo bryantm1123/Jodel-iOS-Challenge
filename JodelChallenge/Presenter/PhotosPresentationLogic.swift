@@ -10,7 +10,7 @@ import Foundation
 
 protocol PhotosPresentationLogic {
     var photoService: FlickrService? { get }
-    var photoURLs: [URL]? { get }
+    var photoURLs: [PhotoTuple]? { get }
     
     func fetchPhotos(for count: String, on page: String)
 }

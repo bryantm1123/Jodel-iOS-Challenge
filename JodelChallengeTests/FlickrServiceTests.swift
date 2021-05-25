@@ -101,10 +101,10 @@ class FlickrServiceTests: XCTestCase {
         let photos: [Photo] = [Photo(id: "1", owner: "me", secret: "secret", server: "server", farm: 0, title: "mockPhoto", isPublic: 0, isFriend: 0, isFamily: 0)]
         
         // When
-        let urls: [URL] = (sut?.fetchPhotoUrls(from: photos))!
+        let urls: [PhotoTuple] = (sut?.fetchPhotoUrls(from: photos))!
         
         // Then
-        XCTAssertTrue(urls.first!.absoluteString.contains(photos.first!.server))
+        XCTAssertTrue(urls.first!.1.absoluteString.contains(photos.first!.server))
     }
 }
 
@@ -114,19 +114,21 @@ class MockPhotoEngine: PhotoEngine {
     
     var response: [String:Any]?
     var error: Error?
-    var photoURLs: [URL] = []
+    var photoURLs: [PhotoTuple] = []
     
     func fetchPhotos(method: FKFlickrAPIMethod, completion: @escaping FKAPIRequestCompletion) {
         completion(response, error)
     }
     
-    func fetchPhotoUrls(from photos: [Photo]) -> [URL] {
+    func fetchPhotoUrls(from photos: [Photo]) -> [PhotoTuple] {
         let id = photos.first?.id
         let server = photos.first?.server
         let secret = photos.first?.secret
+        let url = URL(string: "https://farm\(id ?? "").static.flickr.com/\(server ?? "")/\(secret ?? "")).jpg")!
+        let title = "myTitle"
         
         return [
-            URL(string: "https://farm\(id ?? "").static.flickr.com/\(server ?? "")/\(secret ?? "")).jpg")!
+            (title, url)
         ]
     }
     

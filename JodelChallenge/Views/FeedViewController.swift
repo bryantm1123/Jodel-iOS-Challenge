@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FeedViewController : UICollectionViewController {
+class FeedViewController : UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var photosPresenter: PhotosPresenter?
     
@@ -31,6 +31,14 @@ class FeedViewController : UICollectionViewController {
         cell.configure(with: photo)
         return cell
     }
+    
+    //MARK: - UICollectionViewDelegateFlowLayout
+
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
+        {
+            let screenWidth = self.view.frame.width
+            return CGSize(width: screenWidth - 50, height: screenWidth - 50)
+        }
 }
 
 extension FeedViewController: PhotoDeliveryDelegate {

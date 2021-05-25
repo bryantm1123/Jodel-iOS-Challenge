@@ -11,7 +11,7 @@ import Foundation
 class PhotosPresenter: PhotosPresentationLogic {
     
     var photoService: FlickrService? = FlickrService()
-    var photoURLs: [URL]? = []
+    var photoURLs: [PhotoTuple]? = []
     private weak var photoDeliveryDelegate: PhotoDeliveryDelegate?
     
     init(with photoDeliveryDelegate: PhotoDeliveryDelegate) {

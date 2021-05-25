@@ -13,7 +13,6 @@
 		3FBCC74A1F73AE9200D35147 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FBCC7481F73AE9200D35147 /* Main.storyboard */; };
 		3FBCC74C1F73AE9200D35147 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FBCC74B1F73AE9200D35147 /* Assets.xcassets */; };
 		3FBCC74F1F73AE9200D35147 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FBCC74D1F73AE9200D35147 /* LaunchScreen.storyboard */; };
-		3FBCC75A1F73AE9200D35147 /* JodelChallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBCC7591F73AE9200D35147 /* JodelChallengeTests.swift */; };
 		8A0714B8C2DB05A4DE007652 /* Pods_JodelChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0974C1BD2146B8D1E71B4620 /* Pods_JodelChallenge.framework */; };
 		926F59462658A85E00A0E029 /* FlickrService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926F594426589C8E00A0E029 /* FlickrService.swift */; };
 		926F59492658B54800A0E029 /* PhotoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926F59482658B54800A0E029 /* PhotoResponse.swift */; };
@@ -47,7 +46,6 @@
 		3FBCC74E1F73AE9200D35147 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3FBCC7501F73AE9200D35147 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3FBCC7551F73AE9200D35147 /* JodelChallengeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JodelChallengeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3FBCC7591F73AE9200D35147 /* JodelChallengeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JodelChallengeTests.swift; sourceTree = "<group>"; };
 		3FBCC75B1F73AE9200D35147 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		725C4F04B15E5272D8D1E3A0 /* Pods-JodelChallenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JodelChallenge.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JodelChallenge/Pods-JodelChallenge.debug.xcconfig"; sourceTree = "<group>"; };
 		926F594426589C8E00A0E029 /* FlickrService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrService.swift; sourceTree = "<group>"; };
@@ -150,7 +148,6 @@
 				926F5954265B5E5200A0E029 /* PhotosPresenterTests.swift */,
 				926F594C2658C25200A0E029 /* Resources */,
 				926F594A2658C07300A0E029 /* FlickrServiceTests.swift */,
-				3FBCC7591F73AE9200D35147 /* JodelChallengeTests.swift */,
 				3FBCC75B1F73AE9200D35147 /* Info.plist */,
 			);
 			path = JodelChallengeTests;
@@ -360,7 +357,6 @@
 			files = (
 				926F594B2658C07300A0E029 /* FlickrServiceTests.swift in Sources */,
 				926F5955265B5E5200A0E029 /* PhotosPresenterTests.swift in Sources */,
-				3FBCC75A1F73AE9200D35147 /* JodelChallengeTests.swift in Sources */,
 				926F5958265B60B300A0E029 /* MockDataStubber.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
