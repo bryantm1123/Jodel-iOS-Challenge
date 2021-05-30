@@ -23,15 +23,21 @@ class FeedViewController : UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photosPresenter?.photoModels.count ?? 0
+        return photosPresenter?.totalCount ?? 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FeedCell", for: indexPath) as? FeedCell,
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FeedCell", for: indexPath) as? FeedCell else { return UICollectionViewCell() }
         
-              let photo = photosPresenter?.photoModels[indexPath.row] else { return UICollectionViewCell() }
-        
-        cell.configure(with: photo)
+        // Show the loading indicator on the loading cell
+        // otherwise populate with the photo
+        if isLoadingCell(for: indexPath) {
+            cell.configure(with: .none)
+        } else {
+            let photo = photosPresenter?.photoModels[indexPath.row]
+            cell.configure(with: photo)
+        }
+    
         return cell
     }
 }
@@ -50,6 +56,8 @@ extension FeedViewController: UICollectionViewDelegateFlowLayout {
 // MARK: Prefetching delegate
 extension FeedViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        // Go ahead and pre-fetch next page photos
+        // when we get to the loading cell
         if indexPaths.contains(where: isLoadingCell) {
             photosPresenter?.fetchPhotos()
         }
@@ -72,7 +80,7 @@ private extension FeedViewController {
     /// by calculating the intersection of indexPaths passed in (as calculated by the presenter)
     /// with the visible indexPaths
     /// - Parameter indexPaths: Index paths that may need to be reloaded
-    /// - Returns: the visible index paths to reload 
+    /// - Returns: the visible index paths to reload
    func visibleIndexPathsToReload(intersecting indexPaths: [IndexPath]) -> [IndexPath] {
         let indexPathsForVisibleRows = collectionView.indexPathsForVisibleItems
         let indexPathsIntersection = Set(indexPathsForVisibleRows).intersection(indexPaths)
@@ -86,12 +94,14 @@ extension FeedViewController: PhotoDeliveryDelegate {
     
     func didReceivePhotos(with newIndexPathsToReload: [IndexPath]?) {
         DispatchQueue.main.async { [weak self] in
-            
+            // Reload the whole collection view the first time
             guard let pathsToReload = newIndexPathsToReload else {
                 self?.loadingIndicator.stopAnimating()
                 self?.collectionView.reloadData()
                 return
             }
+            // On subsequent fetches, reload only the index paths
+            // for the new photos
             self?.loadingIndicator.stopAnimating()
             self?.collectionView.reloadItems(at: pathsToReload)
         }

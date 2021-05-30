@@ -13,13 +13,21 @@ class FeedCell : UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     
-    public func configure(with photo: PhotoTuple) {
-        if let data = try? Data(contentsOf: photo.1) {
+    public func configure(with photo: PhotoTuple?) {
+        if let photoModel = photo,
+           let data = try? Data(contentsOf: photoModel.1) {
             let image = UIImage(data: data)
             imageView.image = image
+            titleLabel.text = photoModel.0
+            imageView.alpha = 1
+            titleLabel.alpha = 1
+            loadingIndicator.stopAnimating()
+        } else {
+            imageView.alpha = 0
+            titleLabel.alpha = 1
+            loadingIndicator.startAnimating()
         }
-        
-        titleLabel.text = photo.0
     }
 }

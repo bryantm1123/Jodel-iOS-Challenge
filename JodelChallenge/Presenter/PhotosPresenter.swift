@@ -35,7 +35,7 @@ class PhotosPresenter: PhotosPresentationLogic {
         photoService?.fetchPhotos(for: countPerPage, on: currentPage, completion: { [weak self] result in
             switch result {
                 case .success(let response):
-                    print(response)
+                    print("Loading page: \(String(describing: self?.currentPage))")
                     self?.currentPage += 1
                     self?.total = response.photos.total
                     self?.isFetchInProgress = false
