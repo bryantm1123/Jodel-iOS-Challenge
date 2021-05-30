@@ -86,7 +86,6 @@
                                 </constraints>
                                 <size key="customSize" width="310" height="242"/>
                                 <connections>
-                                    <outlet property="background" destination="kP6-jL-cCX" id="8SN-Xw-nfz"/>
                                     <outlet property="imageView" destination="gEx-j7-hLX" id="WXb-z4-hnr"/>
                                     <outlet property="titleLabel" destination="DHV-QL-WYt" id="HDg-Lr-tdP"/>
                                 </connections>
