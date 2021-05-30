@@ -10,15 +10,12 @@ import UIKit
 
 class FeedViewController : UICollectionViewController {
     
-    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
-    
     var photosPresenter: PhotosPresenter?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         photosPresenter = PhotosPresenter(with: self)
         collectionView.prefetchDataSource = self
-        loadingIndicator.startAnimating()
         photosPresenter?.fetchPhotos()
     }
     
@@ -96,13 +93,11 @@ extension FeedViewController: PhotoDeliveryDelegate {
         DispatchQueue.main.async { [weak self] in
             // Reload the whole collection view the first time
             guard let pathsToReload = newIndexPathsToReload else {
-                self?.loadingIndicator.stopAnimating()
                 self?.collectionView.reloadData()
                 return
             }
             // On subsequent fetches, reload only the index paths
             // for the new photos
-            self?.loadingIndicator.stopAnimating()
             self?.collectionView.reloadItems(at: pathsToReload)
         }
     }
