@@ -10,23 +10,26 @@ import UIKit
 
 class FeedViewController : UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+    
     var photosPresenter: PhotosPresenter?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         photosPresenter = PhotosPresenter(with: self)
         
-        photosPresenter?.fetchPhotos(for: "15", on: "1")
+        loadingIndicator.startAnimating()
+        photosPresenter?.fetchPhotos()
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photosPresenter?.photoURLs?.count ?? 0
+        return photosPresenter?.photoModels?.count ?? 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FeedCell", for: indexPath) as? FeedCell,
         
-        let photo = photosPresenter?.photoURLs?[indexPath.row] else { return UICollectionViewCell() }
+        let photo = photosPresenter?.photoModels?[indexPath.row] else { return UICollectionViewCell() }
         
         cell.configure(with: photo)
         return cell
@@ -47,6 +50,7 @@ extension FeedViewController: PhotoDeliveryDelegate {
     
     func didReceivePhotos() {
         DispatchQueue.main.async { [weak self] in
+            self?.loadingIndicator.stopAnimating()
             self?.collectionView.reloadData()
         }
     }

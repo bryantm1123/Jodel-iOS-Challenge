@@ -45,7 +45,7 @@ class PhotosPresenterTests: XCTestCase {
         let timeInSeconds = 2.0 // time you need for all tasks to be finished
         
         // When
-        sut?.fetchPhotos(for: "15", on: "1")
+        sut?.fetchPhotos()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + timeInSeconds, execute: {
             self.expectation?.fulfill()
@@ -69,7 +69,7 @@ class PhotosPresenterTests: XCTestCase {
         sut?.photoService = FlickrService(mockEngine)
         
         // When
-        sut?.fetchPhotos(for: "15", on: "1")
+        sut?.fetchPhotos()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + timeInSeconds, execute: {
             self.expectation?.fulfill()

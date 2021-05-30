@@ -36,7 +36,7 @@ class FlickrServiceTests: XCTestCase {
         let expectedFirstPhotoTitle = "*Seceda at the golden hour*"
         
         // When
-        sut?.fetchPhotos(for: "10", completion: { result in
+        sut?.fetchPhotos(for: 10, on: 1, completion: { result in
             
             // Then
             switch result {
@@ -59,7 +59,7 @@ class FlickrServiceTests: XCTestCase {
         let expectedError = PhotoServiceError.decodingError
         
         // When
-        sut?.fetchPhotos(for: "10", completion: { result in
+        sut?.fetchPhotos(for: 10, on: 1, completion: { result in
             
             // Then
             switch result {
@@ -81,7 +81,7 @@ class FlickrServiceTests: XCTestCase {
         let expectedError = PhotoServiceError.networkError
         
         // When
-        sut?.fetchPhotos(for: "10", completion: { result in
+        sut?.fetchPhotos(for: 10, on: 1, completion: { result in
             
             // Then
             switch result {
@@ -101,7 +101,7 @@ class FlickrServiceTests: XCTestCase {
         let photos: [Photo] = [Photo(id: "1", owner: "me", secret: "secret", server: "server", farm: 0, title: "mockPhoto", isPublic: 0, isFriend: 0, isFamily: 0)]
         
         // When
-        let urls: [PhotoTuple] = (sut?.fetchPhotoUrls(from: photos))!
+        let urls: [PhotoTuple] = (sut?.fetchPhotoModels(from: photos))!
         
         // Then
         XCTAssertTrue(urls.first!.1.absoluteString.contains(photos.first!.server))
@@ -120,7 +120,7 @@ class MockPhotoEngine: PhotoEngine {
         completion(response, error)
     }
     
-    func fetchPhotoUrls(from photos: [Photo]) -> [PhotoTuple] {
+    func buildPhotoModels(from photos: [Photo]) -> [PhotoTuple] {
         let id = photos.first?.id
         let server = photos.first?.server
         let secret = photos.first?.secret

@@ -22,10 +22,12 @@ class FlickrService {
     
     /// Fetches photos from the Flickr API
     /// - Parameters:
-    ///   - count: The number of items to fetch
+    ///   - count: The number of items to fetch per page
+    ///   - page: The current page number to fetch
     ///   - completion: A PhotoResponse object or Error as a Result
-    func fetchPhotos(for count: String, completion: @escaping PhotosResult) {
-        flickrInteresting.per_page = count
+    func fetchPhotos(for count: Int, on page: Int, completion: @escaping PhotosResult) {
+        flickrInteresting.per_page = String(count)
+        flickrInteresting.page = String(page)
         
         engine.fetchPhotos(method: flickrInteresting, completion: { (response, error) in
             
@@ -70,8 +72,8 @@ class FlickrService {
     /// Fetches photo urls using the FlickrKit framework
     /// - Parameter photos: An array of photo objects retrieved from the Flickr API
     /// - Returns: An array of URLs for loading images
-    func fetchPhotoUrls(from photos: [Photo]) -> [PhotoTuple] {
-        return engine.fetchPhotoUrls(from: photos)
+    func fetchPhotoModels(from photos: [Photo]) -> [PhotoTuple] {
+        return engine.buildPhotoModels(from: photos)
     }
     
     
@@ -80,7 +82,7 @@ class FlickrService {
 protocol PhotoEngine {
     func fetchPhotos(method: FKFlickrAPIMethod, completion: @escaping FKAPIRequestCompletion)
     
-    func fetchPhotoUrls(from photos: [Photo]) -> [PhotoTuple]
+    func buildPhotoModels(from photos: [Photo]) -> [PhotoTuple]
 }
 
 extension FlickrKit: PhotoEngine {
@@ -88,7 +90,7 @@ extension FlickrKit: PhotoEngine {
         call(method, completion: completion)
     }
     
-    func fetchPhotoUrls(from photos: [Photo]) -> [PhotoTuple] {
+    func buildPhotoModels(from photos: [Photo]) -> [PhotoTuple] {
         var photoUrls: [PhotoTuple] = []
         
         photos.forEach({
@@ -108,4 +110,5 @@ enum PhotoServiceError: Error {
     case networkError
 }
 
+// TODO: refactor to struct model
 typealias PhotoTuple = (String, URL)

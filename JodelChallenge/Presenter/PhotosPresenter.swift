@@ -11,23 +11,34 @@ import Foundation
 class PhotosPresenter: PhotosPresentationLogic {
     
     var photoService: FlickrService? = FlickrService()
-    var photoURLs: [PhotoTuple]? = []
+    var photoModels: [PhotoTuple]? = []
     private weak var photoDeliveryDelegate: PhotoDeliveryDelegate?
+    private var currentPage: Int = 1
+    private var countPerPage: Int = 10
+    private var totalCount: Int = 500
+    private var isFetchInProgress: Bool = false
     
     init(with photoDeliveryDelegate: PhotoDeliveryDelegate) {
         self.photoDeliveryDelegate = photoDeliveryDelegate
     }
     
     
-    func fetchPhotos(for count: String, on page: String) {
-        photoService?.fetchPhotos(for: count, completion: { [weak self] result in
+    func fetchPhotos() {
+        
+        guard !isFetchInProgress else { return }
+        
+        isFetchInProgress = true
+        
+        photoService?.fetchPhotos(for: countPerPage, on: currentPage, completion: { [weak self] result in
             switch result {
                 case .success(let response):
                     print(response)
-                    self?.photoURLs = self?.photoService?.fetchPhotoUrls(from: response.photos.photo)
+                    self?.isFetchInProgress = false
+                    self?.photoModels = self?.photoService?.fetchPhotoModels(from: response.photos.photo)
                     self?.photoDeliveryDelegate?.didReceivePhotos()
                 case .failure(let error):
                     print(error)
+                    self?.isFetchInProgress = false
                     self?.photoDeliveryDelegate?.didReceiveError(error)
             }
         })
