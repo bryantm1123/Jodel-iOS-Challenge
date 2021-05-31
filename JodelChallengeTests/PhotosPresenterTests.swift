@@ -84,7 +84,7 @@ class PhotosPresenterTests: XCTestCase {
 }
 
 extension PhotosPresenterTests: PhotoDeliveryDelegate {
-    func didReceivePhotos() {
+    func didReceivePhotos(with newIndexPathsToReload: [IndexPath]?) {
         didReceivePhotosCalled = true
     }
     

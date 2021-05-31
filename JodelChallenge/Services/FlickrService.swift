@@ -72,8 +72,8 @@ class FlickrService {
     /// Fetches photo urls using the FlickrKit framework
     /// - Parameter photos: An array of photo objects retrieved from the Flickr API
     /// - Returns: An array of URLs for loading images
-    func fetchPhotoModels(from photos: [Photo]) -> [PhotoTuple] {
-        return engine.buildPhotoModels(from: photos)
+    func fetchFeedModels(from photos: [Photo]) -> [FeedModel] {
+        return engine.buildFeedModels(from: photos)
     }
     
     
@@ -82,7 +82,7 @@ class FlickrService {
 protocol PhotoEngine {
     func fetchPhotos(method: FKFlickrAPIMethod, completion: @escaping FKAPIRequestCompletion)
     
-    func buildPhotoModels(from photos: [Photo]) -> [PhotoTuple]
+    func buildFeedModels(from photos: [Photo]) -> [FeedModel]
 }
 
 extension FlickrKit: PhotoEngine {
@@ -90,12 +90,12 @@ extension FlickrKit: PhotoEngine {
         call(method, completion: completion)
     }
     
-    func buildPhotoModels(from photos: [Photo]) -> [PhotoTuple] {
-        var photoUrls: [PhotoTuple] = []
+    func buildFeedModels(from photos: [Photo]) -> [FeedModel] {
+        var photoUrls: [FeedModel] = []
         
         photos.forEach({
             let photoURL = FlickrKit.shared().photoURL(for: .medium640, photoID: $0.id, server: $0.server, secret: $0.secret, farm: "\($0.farm)")
-            photoUrls.append(($0.title, photoURL))
+            photoUrls.append(FeedModel(title: $0.title, url: photoURL))
         })
         
         return photoUrls
@@ -109,6 +109,3 @@ enum PhotoServiceError: Error {
     case decodingError
     case networkError
 }
-
-// TODO: refactor to struct model
-typealias PhotoTuple = (String, URL)

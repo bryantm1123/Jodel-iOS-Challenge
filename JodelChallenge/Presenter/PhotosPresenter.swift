@@ -11,11 +11,11 @@ import Foundation
 class PhotosPresenter: PhotosPresentationLogic {
     
     var photoService: FlickrService? = FlickrService()
-    var photoModels: [PhotoTuple] = []
+    var photoModels: [FeedModel] = []
     private weak var photoDeliveryDelegate: PhotoDeliveryDelegate?
     private var currentPage: Int = 1
     private var countPerPage: Int = 10
-    private var total: Int = 500
+    private var total: Int = 10
     private var isFetchInProgress: Bool = false
     
     init(with photoDeliveryDelegate: PhotoDeliveryDelegate) {
@@ -39,7 +39,7 @@ class PhotosPresenter: PhotosPresentationLogic {
                     self?.currentPage += 1
                     self?.total = response.photos.total
                     self?.isFetchInProgress = false
-                    guard let newPhotos = self?.photoService?.fetchPhotoModels(from: response.photos.photo) else { return }
+                    guard let newPhotos = self?.photoService?.fetchFeedModels(from: response.photos.photo) else { return }
                     self?.photoModels.append(contentsOf: newPhotos)
                     
                     if response.photos.page > 1 {
@@ -60,7 +60,7 @@ class PhotosPresenter: PhotosPresentationLogic {
     /// Calculates the index paths for the last page of photos received from the API.
     /// - Parameter newPhotos: The last page of photos received
     /// - Returns: The indexPaths to reload on the collection view
-    private func calculateIndexPathsToReload(from newPhotos: [PhotoTuple]) -> [IndexPath] {
+    private func calculateIndexPathsToReload(from newPhotos: [FeedModel]) -> [IndexPath] {
         let startIndex = photoModels.count - newPhotos.count
         let endIndex = startIndex + newPhotos.count
         return (startIndex..<endIndex).map { IndexPath(row: $0, section: 0) }

@@ -23,12 +23,12 @@ class FeedCell : UICollectionViewCell {
         imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(animate)))
     }
     
-    public func configure(with photo: PhotoTuple?) {
+    public func configure(with photo: FeedModel?) {
         if let photoModel = photo,
-           let data = try? Data(contentsOf: photoModel.1) {
+           let data = try? Data(contentsOf: photoModel.url) {
             let image = UIImage(data: data)
             imageView.image = image
-            titleLabel.text = photoModel.0.isEmpty ? "Untitled" : photoModel.0
+            titleLabel.text = photoModel.title.isEmpty ? "Untitled" : photoModel.title
             imageView.alpha = 1
             titleLabel.alpha = 1
             loadingIndicator.stopAnimating()

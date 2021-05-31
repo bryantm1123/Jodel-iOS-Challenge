@@ -10,7 +10,7 @@ import Foundation
 
 protocol PhotosPresentationLogic {
     var photoService: FlickrService? { get }
-    var photoModels: [PhotoTuple] { get }
+    var photoModels: [FeedModel] { get }
     
     func fetchPhotos()
 }
