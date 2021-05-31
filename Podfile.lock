@@ -1,16 +1,22 @@
 PODS:
   - FlickrKit (1.0.9)
+  - SDWebImage (5.11.1):
+    - SDWebImage/Core (= 5.11.1)
+  - SDWebImage/Core (5.11.1)
 
 DEPENDENCIES:
-  - FlickrKit (= 1.0.9)
+  - FlickrKit
+  - SDWebImage (~> 5.0)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  trunk:
     - FlickrKit
+    - SDWebImage
 
 SPEC CHECKSUMS:
   FlickrKit: 79ffaf64a12293ba2b1aa8a2e53a4958cb113256
+  SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
 
-PODFILE CHECKSUM: eb814c8c894c017dcc93124b1beb2581aaff2be0
+PODFILE CHECKSUM: cb5349cc4910f7cc04c279f57f90f35eb093989f
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.9.1
