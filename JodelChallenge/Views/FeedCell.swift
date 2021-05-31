@@ -11,7 +11,6 @@ import UIKit
 class FeedCell : UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var background: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     
@@ -19,10 +18,7 @@ class FeedCell : UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // TODO: Fix constraints: Image view seems covered up by something. not tappable across the fully visible image in the UI
-//        imageView.layer.borderWidth = 2.0
-//        imageView.layer.borderColor = UIColor.blue.cgColor
-        imageView.clipsToBounds = true
+        imageView.layer.masksToBounds = true
         imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(animate)))
     }
@@ -32,7 +28,7 @@ class FeedCell : UICollectionViewCell {
            let data = try? Data(contentsOf: photoModel.1) {
             let image = UIImage(data: data)
             imageView.image = image
-            titleLabel.text = photoModel.0
+            titleLabel.text = photoModel.0.isEmpty ? "Untitled" : photoModel.0
             imageView.alpha = 1
             titleLabel.alpha = 1
             loadingIndicator.stopAnimating()
@@ -44,7 +40,6 @@ class FeedCell : UICollectionViewCell {
     }
     
     @objc func animate() {
-        print("You tapped the image")
         feedController?.animateImageView(on: imageView)
     }
 }

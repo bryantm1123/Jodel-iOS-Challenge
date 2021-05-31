@@ -50,9 +50,17 @@ extension FeedViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
         let screenWidth = self.view.frame.width
-        let reduction = screenWidth * 0.25
-        let height = screenWidth - reduction
-        return CGSize(width: screenWidth, height: height)
+        return CGSize(width: screenWidth, height: screenWidth)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 30
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        collectionView.collectionViewLayout.invalidateLayout()
     }
 }
 
@@ -65,7 +73,6 @@ extension FeedViewController: UICollectionViewDataSourcePrefetching {
             photosPresenter?.fetchPhotos()
         }
     }
-    
 }
 
 // MARK: Prefetching utility functions
