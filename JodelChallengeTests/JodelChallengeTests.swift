@@ -11,26 +11,41 @@ import XCTest
 
 class JodelChallengeTests: XCTestCase {
     
+    var presenter: FeedPresenter?
+    var connection: IManager!
+    
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        connection = Mock()
+        presenter = FeedPresenter(view: UIViewController(), imageManager: connection)
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
+        presenter = nil
+        connection = nil
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testImagesAreLoaded() {
+        presenter?.loadData()
+        XCTAssert(presenter?.getPhotosList().isEmpty == false, "Images are not loaded")
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func testNoInternetConnection() {
+        let mockConnection: Mock? = connection as? Mock
+        mockConnection?.networkState = .fail
+        presenter?.loadData()
+        XCTAssert(presenter?.getPhotosList().isEmpty == true, "Images are loaded")
     }
     
+    func testDealyedSuccess() {
+        let mockConnection: Mock? = connection as? Mock
+        mockConnection?.networkState = .delayed
+        presenter?.loadData()
+        
+        let exp = expectation(description: "Test after 5 seconds")
+        _ = XCTWaiter.wait(for: [exp], timeout: 5.0)
+                
+        XCTAssert(presenter?.getPhotosList().isEmpty == false, "Images are not loaded")
+    }
 }
