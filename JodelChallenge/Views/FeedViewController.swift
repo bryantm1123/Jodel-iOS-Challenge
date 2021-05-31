@@ -11,6 +11,10 @@ import UIKit
 class FeedViewController : UICollectionViewController {
     
     var photosPresenter: PhotosPresenter?
+    let zoomBackgroundView: UIView = UIView()
+    let zoomImageView: UIImageView = UIImageView()
+    let tabBarCoverView: UIView = UIView()
+    var selectedImageView: UIImageView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +38,9 @@ class FeedViewController : UICollectionViewController {
             let photo = photosPresenter?.photoModels[indexPath.row]
             cell.configure(with: photo)
         }
-    
+        
+        cell.feedController = self
+        
         return cell
     }
 }
@@ -104,5 +110,77 @@ extension FeedViewController: PhotoDeliveryDelegate {
     
     func didReceiveError(_ error: Error) {
         // TODO: Show error alert
+    }
+}
+
+// MARK: Image zoom animation
+extension FeedViewController {
+    func animateImageView(on imageView: UIImageView) {
+        
+        selectedImageView = imageView
+        
+        guard let startingFrame = imageView.superview?.convert(imageView.frame, to: nil),
+              let keyWindow = UIApplication.shared.keyWindow else { return }
+            
+        // hide the image clicked in the feed
+        imageView.alpha = 0
+        
+        // Setup and add the zoom background view
+        zoomBackgroundView.frame = self.view.frame
+        zoomBackgroundView.backgroundColor = UIColor.black
+        zoomBackgroundView.alpha = 0
+        view.addSubview(zoomBackgroundView)
+        
+        // Setup and add the tab bar cover view to hide the tab bar
+        let tabBarHeight: CGFloat = 100.0
+        tabBarCoverView.frame = CGRect(x: 0, y: keyWindow.frame.height - tabBarHeight, width: keyWindow.frame.width, height: tabBarHeight)
+        tabBarCoverView.backgroundColor = UIColor.black
+        tabBarCoverView.alpha = 0
+        keyWindow.addSubview(tabBarCoverView)
+        
+        // Setup the zoomed in image view
+        zoomImageView.backgroundColor = UIColor.red
+        zoomImageView.frame = startingFrame
+        zoomImageView.image = imageView.image
+        zoomImageView.contentMode = .scaleAspectFill
+        view.addSubview(zoomImageView)
+        
+        // Add a tap gesture to the zoom image for zooming back out
+        zoomImageView.isUserInteractionEnabled = true
+        zoomImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(zoomOutImageView)))
+        
+        UIView.animate(withDuration: 0.3) {
+            
+            // Animate the frame change for the image view
+            let height = (self.view.frame.width / startingFrame.width) * startingFrame.height
+            let y = (self.view.frame.height / 2) - (height / 2)
+            self.zoomImageView.frame = CGRect(x: 0, y: y, width: self.view.frame.width, height: height)
+            
+            // Animate the background view visibility
+            self.zoomBackgroundView.alpha = 1
+            
+            // Animate the tab bar cover view visibility
+            self.tabBarCoverView.alpha = 1
+        }
+    }
+    
+    @objc func zoomOutImageView() {
+        guard let imageView = selectedImageView,
+            let startingFrame = imageView.superview?.convert(imageView.frame, to: nil) else {
+            return
+        }
+        
+        UIView.animate(withDuration: 0.3) {
+            self.zoomImageView.frame = startingFrame
+            self.zoomBackgroundView.alpha = 0
+            self.tabBarCoverView.alpha = 0
+        } completion: { (didComplete) in
+            self.zoomImageView.removeFromSuperview()
+            self.zoomBackgroundView.removeFromSuperview()
+            self.tabBarCoverView.removeFromSuperview()
+            self.selectedImageView?.alpha = 1
+        }
+
+        
     }
 }

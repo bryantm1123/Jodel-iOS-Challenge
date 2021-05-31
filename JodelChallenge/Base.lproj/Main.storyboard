@@ -80,17 +80,18 @@
                                 </view>
                                 <color key="backgroundColor" white="0.92695347790000004" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="kP6-jL-cCX" secondAttribute="bottom" constant="205.5" id="3ey-C3-NY4"/>
                                     <constraint firstItem="kP6-jL-cCX" firstAttribute="top" secondItem="HNq-Nl-u9j" secondAttribute="topMargin" id="CUp-8b-rA2"/>
                                     <constraint firstItem="fQl-yZ-PV4" firstAttribute="centerX" secondItem="kP6-jL-cCX" secondAttribute="centerX" id="Crz-rc-uFQ"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="kP6-jL-cCX" secondAttribute="trailing" id="Cxw-EL-U6v"/>
                                     <constraint firstItem="kP6-jL-cCX" firstAttribute="leading" secondItem="HNq-Nl-u9j" secondAttribute="leadingMargin" id="FBk-7f-1rS"/>
                                     <constraint firstItem="fQl-yZ-PV4" firstAttribute="centerY" secondItem="kP6-jL-cCX" secondAttribute="centerY" id="bUp-oQ-qDu"/>
+                                    <constraint firstItem="kP6-jL-cCX" firstAttribute="height" secondItem="HNq-Nl-u9j" secondAttribute="height" multiplier="0.117769" id="kFg-bK-oEV"/>
                                     <constraint firstItem="kP6-jL-cCX" firstAttribute="centerX" secondItem="HNq-Nl-u9j" secondAttribute="centerX" id="lKf-mW-eiF"/>
                                     <constraint firstAttribute="width" secondItem="kP6-jL-cCX" secondAttribute="width" multiplier="1.05442" id="paa-rC-hWc"/>
                                 </constraints>
                                 <size key="customSize" width="310" height="242"/>
                                 <connections>
+                                    <outlet property="background" destination="kP6-jL-cCX" id="Mqb-bz-tBV"/>
                                     <outlet property="imageView" destination="gEx-j7-hLX" id="WXb-z4-hnr"/>
                                     <outlet property="loadingIndicator" destination="fQl-yZ-PV4" id="euO-M7-dh4"/>
                                     <outlet property="titleLabel" destination="DHV-QL-WYt" id="HDg-Lr-tdP"/>
