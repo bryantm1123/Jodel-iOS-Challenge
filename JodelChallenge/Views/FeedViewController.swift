@@ -116,7 +116,13 @@ extension FeedViewController: PhotoDeliveryDelegate {
     }
     
     func didReceiveError(_ error: Error) {
-        // TODO: Show error alert
+        let tryAgain: UIAlertAction = UIAlertAction(title: "Try Again", style: .default, handler: { action in
+            self.photosPresenter?.fetchPhotos()
+        })
+        
+        let ok: UIAlertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        
+        showAlert(with: "Oops!", message: "Something went wrong. Please try again.", style: .alert, actions: [ok, tryAgain])
     }
 }
 
