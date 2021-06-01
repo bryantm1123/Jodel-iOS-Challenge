@@ -26,16 +26,23 @@ class PhotosPresenter: PhotosPresentationLogic {
     
     var currentCount: Int { photoModels.count }
     
-    func fetchPhotos() {
+    func fetchPhotos(isRefreshing: Bool = false) {
         
         guard !isFetchInProgress else { return }
         
         isFetchInProgress = true
         
+        // If pull to refresh
+        // start from the first page
+        if isRefreshing {
+            currentPage = 1
+        }
+        
         photoService?.fetchPhotos(for: countPerPage, on: currentPage, completion: { [weak self] result in
             switch result {
                 case .success(let response):
                     print("Loading page: \(String(describing: self?.currentPage))")
+                    
                     self?.currentPage += 1
                     self?.total = response.photos.total
                     self?.isFetchInProgress = false

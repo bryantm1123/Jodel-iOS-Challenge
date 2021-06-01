@@ -18,6 +18,7 @@ class FeedViewController : UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        addRefreshControl()
         photosPresenter = PhotosPresenter(with: self)
         collectionView.prefetchDataSource = self
         photosPresenter?.fetchPhotos()
@@ -195,5 +196,23 @@ extension FeedViewController {
         }
 
         
+    }
+}
+
+// MARK: Pull to refresh
+extension FeedViewController {
+    
+    fileprivate func addRefreshControl() {
+        let refresher = UIRefreshControl()
+        refresher.tintColor = UIColor.systemGray
+        refresher.attributedTitle = NSAttributedString(string: "Pull to refresh", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemGray, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14, weight: .medium)])
+        refresher.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+        collectionView.refreshControl = refresher
+    }
+    
+    @objc func handleRefresh() {
+        photosPresenter?.photoModels.removeAll()
+        photosPresenter?.fetchPhotos(isRefreshing: true)
+        collectionView.refreshControl?.endRefreshing()
     }
 }

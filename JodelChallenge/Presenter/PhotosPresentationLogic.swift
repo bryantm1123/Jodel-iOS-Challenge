@@ -12,5 +12,5 @@ protocol PhotosPresentationLogic {
     var photoService: FlickrService? { get }
     var photoModels: [FeedModel] { get }
     
-    func fetchPhotos()
+    func fetchPhotos(isRefreshing: Bool)
 }
