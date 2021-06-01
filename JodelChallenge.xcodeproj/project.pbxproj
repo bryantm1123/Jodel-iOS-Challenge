@@ -17,6 +17,7 @@
 		920F08D82665634500536059 /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920F08D72665634500536059 /* FeedModel.swift */; };
 		920F08DB26656C7E00536059 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920F08DA26656C7E00536059 /* ImageLoader.swift */; };
 		920F08DE2665A60F00536059 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920F08DD2665A60F00536059 /* UIViewController+Extension.swift */; };
+		920F08E02665B76500536059 /* FeedViewController+ImageZoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920F08DF2665B76500536059 /* FeedViewController+ImageZoom.swift */; };
 		926F59462658A85E00A0E029 /* FlickrService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926F594426589C8E00A0E029 /* FlickrService.swift */; };
 		926F59492658B54800A0E029 /* PhotoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926F59482658B54800A0E029 /* PhotoResponse.swift */; };
 		926F594B2658C07300A0E029 /* FlickrServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926F594A2658C07300A0E029 /* FlickrServiceTests.swift */; };
@@ -54,6 +55,7 @@
 		920F08D72665634500536059 /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
 		920F08DA26656C7E00536059 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		920F08DD2665A60F00536059 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		920F08DF2665B76500536059 /* FeedViewController+ImageZoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedViewController+ImageZoom.swift"; sourceTree = "<group>"; };
 		926F594426589C8E00A0E029 /* FlickrService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrService.swift; sourceTree = "<group>"; };
 		926F59482658B54800A0E029 /* PhotoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoResponse.swift; sourceTree = "<group>"; };
 		926F594A2658C07300A0E029 /* FlickrServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrServiceTests.swift; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				0A0367FA22C4E2BE0041C31E /* FeedViewController.swift */,
+				920F08DF2665B76500536059 /* FeedViewController+ImageZoom.swift */,
 				0A0367FC22C4E5DC0041C31E /* FeedCell.swift */,
 			);
 			path = Views;
@@ -372,6 +375,7 @@
 				926F59492658B54800A0E029 /* PhotoResponse.swift in Sources */,
 				926F5951265B4E2100A0E029 /* PhotosPresenter.swift in Sources */,
 				920F08DB26656C7E00536059 /* ImageLoader.swift in Sources */,
+				920F08E02665B76500536059 /* FeedViewController+ImageZoom.swift in Sources */,
 				0A0367FD22C4E5DC0041C31E /* FeedCell.swift in Sources */,
 				926F5953265B4E4C00A0E029 /* PhotosPresentationLogic.swift in Sources */,
 				920F08DE2665A60F00536059 /* UIViewController+Extension.swift in Sources */,
