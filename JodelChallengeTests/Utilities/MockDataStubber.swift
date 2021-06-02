@@ -36,10 +36,6 @@ extension XCTest: MockDataStubber {
         return nil
     }
     
-    /// A stub function that returns our our sample photo response as data for passing to our service's decoder
-    /// - Returns: An error if one is caught during conversion of the mock response to data
-    
-    
     /// A stub function that returns a custom error object used for testing
     /// - Returns: A custom error that can be passed to our mock
     func getError() -> Error {
