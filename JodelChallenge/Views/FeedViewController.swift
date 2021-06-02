@@ -139,6 +139,8 @@ extension FeedViewController {
         collectionView.refreshControl = refresher
     }
     
+    
+    // On a pull to refresh, assume we want to start with a fresh list
     @objc func handleRefresh() {
         photosPresenter?.photoModels.removeAll()
         photosPresenter?.fetchPhotos(isRefreshing: true)

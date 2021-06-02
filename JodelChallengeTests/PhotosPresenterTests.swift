@@ -51,7 +51,7 @@ class PhotosPresenterTests: XCTestCase {
             self.expectation?.fulfill()
         })
         
-        wait(for: [expectation!], timeout: timeInSeconds + 1.0)
+        wait(for: [expectation!], timeout: timeInSeconds + 5.0)
         
         // Then
         XCTAssertTrue(self.didReceivePhotosCalled)
