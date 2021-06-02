@@ -36,6 +36,9 @@ class FeedCell : UICollectionViewCell {
         }
     }
     
+    
+    /// Conditionally loads either the Feed Model or a loading indicator
+    /// - Parameter photo: A Feed Model if we have one
     public func configure(with photo: FeedModel?) {
         if let photoModel = photo {
             loadRemoteImage(from: photoModel)
@@ -82,9 +85,10 @@ class FeedCell : UICollectionViewCell {
         })
     }
     
+    // Show loading indicator and hide the image view and title
     fileprivate func showLoadingView() {
         imageView.alpha = 0
-        titleLabel.alpha = 1
+        titleLabel.alpha = 0
         loadingIndicator.startAnimating()
     }
 }
