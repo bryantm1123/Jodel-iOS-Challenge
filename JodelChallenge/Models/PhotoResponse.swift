@@ -8,7 +8,7 @@
 
 import Foundation
 
-// MARK: - Photos
+// MARK: - PhotoResponse
 struct PhotoResponse: Codable {
     let photos: Photos
     let extra: Extra
@@ -26,7 +26,7 @@ struct Extra: Codable {
     }
 }
 
-// MARK: - PhotosClass
+// MARK: - Photos
 struct Photos: Codable {
     let page, pages, perpage, total: Int
     let photo: [Photo]

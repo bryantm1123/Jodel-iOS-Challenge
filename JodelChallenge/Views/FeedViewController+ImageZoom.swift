@@ -17,6 +17,9 @@ extension FeedViewController {
         
         selectedImageView = imageView
         
+        // Get the frame of the selected image view as the starting point
+        // for our animation
+        // Also get a reference to the key window for hiding the tab bar
         guard let startingFrame = imageView.superview?.convert(imageView.frame, to: nil),
               let keyWindow = UIApplication.shared.keyWindow else { return }
             
@@ -54,6 +57,9 @@ extension FeedViewController {
             return
         }
         
+        // Return our zoomed in image back to the starting frame,
+        // hide the background views and remove all from super view
+        // then unhide the selected image view in the feed
         UIView.animate(withDuration: 0.3) {
             self.zoomImageView.frame = startingFrame
             self.zoomBackgroundView.alpha = 0

@@ -47,6 +47,7 @@ class FeedCell : UICollectionViewCell {
         }
     }
     
+    /// Tells the feed view controller to start the zoom animation for a selected image
     @objc func animate() {
         feedController?.animateImageView(on: imageView)
     }

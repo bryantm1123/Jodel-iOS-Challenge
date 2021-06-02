@@ -79,6 +79,8 @@ class FlickrService {
     
 }
 
+
+/// A protocol that will allow us to mock the FlickrKit singleton for testing
 protocol PhotoEngine {
     func fetchPhotos(method: FKFlickrAPIMethod, completion: @escaping FKAPIRequestCompletion)
     
@@ -86,10 +88,19 @@ protocol PhotoEngine {
 }
 
 extension FlickrKit: PhotoEngine {
+    
+    /// Fetches the photos from the Flickr API
+    /// - Parameters:
+    ///   - method: The Flickr API method
+    ///   - completion: The Flickr API request completion handler
     func fetchPhotos(method: FKFlickrAPIMethod, completion: @escaping FKAPIRequestCompletion) {
         call(method, completion: completion)
     }
     
+    
+    /// Builds the data model for the photo feed
+    /// - Parameter photos: An array of photo ojbects returned from the Flickr API
+    /// - Returns: An array of data models for our photo feed
     func buildFeedModels(from photos: [Photo]) -> [FeedModel] {
         var photoUrls: [FeedModel] = []
         
